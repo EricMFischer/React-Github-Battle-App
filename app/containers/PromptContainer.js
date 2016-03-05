@@ -1,5 +1,5 @@
 var React = require('React');
-var transparentBg = require('../styles').transparentBg;
+var Prompt = require('../components/Prompt')
 
 var PromptContainer = React.createClass({
   contextTypes: { // don't have to pass router down as props of a component; it's here as contextTypes[router]
@@ -12,13 +12,13 @@ var PromptContainer = React.createClass({
     }
   },
 
-  onUpdateUser: function(e) { // update this.state.username when input changes
+  handleUpdateUser: function(e) { // update this.state.username when input changes
     this.setState({
       username: e.target.value
     });
   },
 
-  onSubmitUser: function(e) {
+  handleSubmitUser: function(e) {
     e.preventDefault();
     var username = this.state.username;
     this.setState({
@@ -43,28 +43,12 @@ var PromptContainer = React.createClass({
   },
 
   render: function() {
-    console.log(this);
     return (
-      <div className="jumbotron col-sm-6 col-sm-offset-3 text-center" style={transparentBg}>
-        <h1>{this.props.route.header}</h1>
-        <div className="col-sm-12">
-          <form onSubmit={this.onSubmitUser}>
-            <div className="form-group">
-              <input
-                className="form-control"
-                placeholder="Github username"
-                onChange={this.onUpdateUser}
-                value={this.state.username}
-                type="text" />
-            </div>
-            <div className="form-group col-sm-4 col-sm-offset-4">
-              <button className="btn btn-block btn-success" type="submit">
-              Continue
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <Prompt
+        onSubmitUser = {this.handleSubmitUser} // fn needed
+        onUpdateUser = {this.handleUpdateUser}
+        header = {this.props.route.header} // str needed
+        username = {this.state.username}/>
     )
   }
 });
@@ -72,6 +56,7 @@ var PromptContainer = React.createClass({
 module.exports = PromptContainer;
 
 /*
-Good idea to separate container component from presentational components
+Good idea to separate container from presentational components
 PromptContainer: business logic
-AnotherComponent: presentational logic (UI)
+Prompt: presentational logic (UI)
+*/
