@@ -15,7 +15,7 @@ var routes = (
       <IndexRoute component={Home}/>
       <Route path='playerOne' header='Player One' component={PromptContainer}/>
       <Route path='playerTwo/:playerOne' header='Player Two' component={PromptContainer}/>
-      <Route path='githubBattle/:playerTwo/:playerOne' header='Github Battle' component={Confirm Battle Container}/>
+      <Route path='battle' component={ConfirmBattleContainer}/>
     </Route>
   </Router>
 );
